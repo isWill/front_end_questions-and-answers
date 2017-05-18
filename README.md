@@ -42,5 +42,12 @@ var person2 = new Person(" Greg", 27, "Doctor");
 
 ### 2.2 原型模式
 ```javascript
-
+function Person(){ }
+ Person. prototype. name = "Nicholas";
+ Person. prototype. age = 29;
+ Person. prototype. job = "Software Engineer";
+ Person. prototype. sayName = function(){ 
+alert( this. name); 
+};
+ 
 ```
