@@ -23,3 +23,24 @@ function createPerson( name, age, job){
 var person1 = createPerson(" Nicholas", 29, "Software Engineer"); 
 var person2 = createPerson(" Greg", 27, "Doctor");
 ```
+工厂模式没有解决对象识别的问题（你不知道一个对象的类型）
+
+### 2.2 构造函数模式
+```javascript
+function Person( name, age, job){ 
+  this. name = name;
+  this. age = age; 
+  this. job = job; 
+  this. sayName = function(){ 
+    alert( this. name); 
+  }; 
+}  
+var person1 = new Person(" Nicholas", 29, "Software Engineer"); 
+var person2 = new Person(" Greg", 27, "Doctor");
+```
+构造函数模式每实例化一个对象相同的方法都要再创建一遍（创建两个完成同样任务的Function实例是没有必要的）
+
+### 2.2 原型模式
+```javascript
+
+```
