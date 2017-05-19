@@ -25,7 +25,7 @@ var person2 = createPerson(" Greg", 27, "Doctor");
 ```
 工厂模式没有解决对象识别的问题（你不知道一个对象的类型）
 
-### 2.2 构造函数模式
+### 2.3 构造函数模式
 ```javascript
 function Person( name, age, job){ 
   this. name = name;
