@@ -28,7 +28,9 @@ React为啥这么大？因为它实现了一个虚拟DOM（Virtual DOM）。虚�
 而虚拟DOM干了什么？它直接用JavaScript实现了DOM树（大致上）。组件的HTML结构并不会直接生成DOM，而是映射生成虚拟的JavaScript DOM结构，React又通过在这个虚拟DOM上实现了一个 diff 算法找出最小变更，再把这些变更写入实际的DOM中。这个虚拟DOM以JS结构的形式存在，计算性能会比较好，而且由于减少了实际DOM操作次数，性能会有较大提升
 ```
 2. 创建对象的几种模式
-#### 2.1 工厂模式
+
+2.1 工厂模式
+
 ```javascript
 function createPerson( name, age, job){ 
   var o = new Object();
