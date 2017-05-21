@@ -1,16 +1,73 @@
 # 前端问答
 ## 「 CSS篇 」
 1. CSS 盒子模型，绝对定位和相对定位
-  > 盒子模型：
-  ```
-  标准盒子模型的宽度 = 左右margin + 左右border + 左右padding + width；
-  IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和padiing)；
-  ```
-  > 相对定位和绝对定位：
-  ```
-  
-  ```
+
+盒子模型：
+标准盒子模型的宽度 = 左右margin + 左右border + 左右padding + width；
+IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和padiing)；
+相对定位和绝对定位：
+
 2. 清除浮动，什么时候需要清除浮动，清除浮动都有哪些方法
+
+给子元素添加float属性，同时希望父元素的高度不会塌陷，此时我们需要清除浮动；
+清除浮动的几种方法：
++ 1. 给父元素设置高度
+
+这种方式简单粗暴，但是，在子元素的高度出现变化时我们需要手动修改父元素高度，比较麻烦
+
++ 2. 在父元素的最后一个子元素上添加属性`clear: both`
+
+```html
+<div class="parent">
+     <div class="child"></div>
+     <div class="child"></div>
+     <div class="child"></div>
+     <div style="clear: left;"></div> <!--页面中添加大量的没有意义的空标签，增加代码冗余-->
+</div>
+```
++ 3. 为在父元素增加伪元素，并为其设置相关属性
+
+```css
+.fix::after { 
+     content:"."; 
+     display:block; 
+     height:0; 
+     visibility:hidden; 
+     clear:both;
+}
+```
+改进后的样式为
+
+```css
+.fix::after { 
+     content:""; 
+     display:table; 
+     clear:both;
+}
+```
++ 4.给父元素添加`overflow: hidden`
+
+这里有必要了解一下BFC块级格式化上下文，只说结论：
+> 创建了 BFC的元素就是一个独立的盒子，不过只有Block-level box可以参与创建BFC， 它规定了内部的Block-level Box如何布局，并且与这个独立盒子里的布局不受外部影响，当然它也不会影响到外面的元素。它具有以下特征：
+. 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
+. Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。
+. 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
+. BFC的区域不会与float box叠加。
+. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。
+. 计算BFC的高度时，浮动元素也参与计算。
+  
+> 看到第六条，如获至宝。只需给父元素创建块级格式化上下文，就可以让浮动的元素参与高度计算，这样一来，父元素的高度就有了。
+不单单只有给父元素添加overflow:hidden才可以创建块级格式化上下文，下列方法都可以：
+. 浮动 (元素的  float不为 none）
+. 绝对定位元素 (元素的 position为 absolute 或 fixed)
+. 行内块 inline-blocks (元素的 display: inline-block)
+. 表格单元格 (元素的 display: table-cell，HTML表格单元格默认属性)
+. 表格标题 (元素的 display: table-caption，HTML表格标题默认属性)
+. overflow的值不为 visible的元素
+. 弹性盒子 flex boxes (元素的 display: flex 或 inline-flex)
+. 用overflow:hidden较多的原因是不会带来其它的布局问题。
+
+> 题外话：其实用块级上下文解释清除浮动个人感觉牵强，但也解释的过去哈。开拓下思维，看下知乎的问题[CSS中为什么overflow:hidden能清除浮动(float)的影响？原理是什么？](https:://www.zhihu.com/question/30938856)，或许能找到你想要的。
 
 3. 如何保持浮层水平垂直居中
 
@@ -20,9 +77,11 @@
 
 6. css3动画效果属性，canvas、svg的区别，CSS3中新增伪类举例
 
-7. px和em和rem的区别，CSS中link 和@import的区别是？
+7. px和em和rem的区别
 
-5. 了解过flex吗？
+8. CSS中link 和@import的区别是？
+
+9. 了解过flex吗？
 
 ## 「 JavaScript 篇 」
 
