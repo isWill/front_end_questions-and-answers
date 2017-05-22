@@ -11,11 +11,11 @@ IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和pad
 
 给子元素添加float属性，同时希望父元素的高度不会塌陷，此时我们需要清除浮动；
 清除浮动的几种方法：
-+ 1. 给父元素设置高度
++ 给父元素设置高度
 
 这种方式简单粗暴，但是，在子元素的高度出现变化时我们需要手动修改父元素高度，比较麻烦
 
-+ 2. 在父元素的最后一个子元素上添加属性`clear: both`
++ 在父元素的最后一个子元素上添加属性`clear: both`
 
 ```html
 <div class="parent">
@@ -25,7 +25,7 @@ IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和pad
      <div style="clear: left;"></div> <!--页面中添加大量的没有意义的空标签，增加代码冗余-->
 </div>
 ```
-+ 3. 为在父元素增加伪元素，并为其设置相关属性
++ 为在父元素增加伪元素，并为其设置相关属性
 
 ```css
 .fix::after { 
@@ -45,43 +45,181 @@ IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和pad
      clear:both;
 }
 ```
-+ 4.给父元素添加`overflow: hidden`
++ 给父元素添加`overflow: hidden`
 
 这里有必要了解一下BFC块级格式化上下文，只说结论：
 > 创建了 BFC的元素就是一个独立的盒子，不过只有Block-level box可以参与创建BFC， 它规定了内部的Block-level Box如何布局，并且与这个独立盒子里的布局不受外部影响，当然它也不会影响到外面的元素。它具有以下特征：
-. 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
-. Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。
-. 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
-. BFC的区域不会与float box叠加。
-. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。
-. 计算BFC的高度时，浮动元素也参与计算。
+1) 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
+2) Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。
+3) 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
+4) BFC的区域不会与float box叠加。
+5) BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。
+6) 计算BFC的高度时，浮动元素也参与计算。
   
 > 看到第六条，如获至宝。只需给父元素创建块级格式化上下文，就可以让浮动的元素参与高度计算，这样一来，父元素的高度就有了。
 不单单只有给父元素添加overflow:hidden才可以创建块级格式化上下文，下列方法都可以：
-. 浮动 (元素的  float不为 none）
-. 绝对定位元素 (元素的 position为 absolute 或 fixed)
-. 行内块 inline-blocks (元素的 display: inline-block)
-. 表格单元格 (元素的 display: table-cell，HTML表格单元格默认属性)
-. 表格标题 (元素的 display: table-caption，HTML表格标题默认属性)
-. overflow的值不为 visible的元素
-. 弹性盒子 flex boxes (元素的 display: flex 或 inline-flex)
-. 用overflow:hidden较多的原因是不会带来其它的布局问题。
+1) 浮动 (元素的  float不为 none）
+2) 绝对定位元素 (元素的 position为 absolute 或 fixed)
+3) 行内块 inline-blocks (元素的 display: inline-block)
+4) 表格单元格 (元素的 display: table-cell，HTML表格单元格默认属性)
+5) 表格标题 (元素的 display: table-caption，HTML表格标题默认属性)
+6) overflow的值不为 visible的元素
+7) 弹性盒子 flex boxes (元素的 display: flex 或 inline-flex)
+8) 用overflow:hidden较多的原因是不会带来其它的布局问题。
 
-> 题外话：其实用块级上下文解释清除浮动个人感觉牵强，但也解释的过去哈。开拓下思维，看下知乎的问题[CSS中为什么overflow:hidden能清除浮动(float)的影响？原理是什么？](https:://www.zhihu.com/question/30938856)，或许能找到你想要的。
+> 题外话：其实用块级上下文解释清除浮动个人感觉牵强，但也解释的过去哈。开拓下思维，看下知乎的问题[CSS中为什么overflow:hidden能清除浮动(float)的影响？原理是什么？](https://www.zhihu.com/question/30938856)，或许能找到你想要的。
 
 3. 如何保持浮层水平垂直居中
++ 利用绝对定位与`transform`
+```html
+<div class="parent">
+ <div class="child"></div>
+</div>
+```
+```css
+ .parent {
+    position: relative;
+ }
+ 
+ .child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+ }
+```
++ 利用绝对定位与`margin`
+```html
+<div class="parent">
+ <div class="child"></div>
+</div>
+```
+```css
+ .parent {
+    position: relative;
+ }
+ 
+ .child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    width: 300px;
+    height: 200px;
+    background: #333;
+ }
+```
++ 利用`flex`
+```html
+<div class="parent">
+ <div class="child"></div>
+</div>
+```
+```css
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+```
++ 利用`table`
+```html
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="child"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+```
+```css
+table {
+    width: 100%;
+    height: 100%;
+    background: #aaa;
+}
+
+td.child {
+    width: 300px;
+    height: 200px;
+    background: #333;
+}
+```
++ 利用`margin: auto`
+```html
+<div class="parent">
+ <div class="child"></div>
+</div>
+```
+```css
+.parent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #aaa;
+}
+
+.child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 300px;
+    height: 200px;
+    background: #333;
+}
+```
 
 4. position 和 display 的取值和各自的意思和用法
+
+position 属性规定元素的定位类型。其属性分别为 static(默认)、absolute、fixed、relative和inherit。
+* static 默认值。可以利用这个值取消定位，使元素快速回归文档流，设置的top，left等值也会随之失效。
+* absolute 生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位。元素脱离文档流，其位置可通过top、bottom、left和right属性进行规定。
+* relative 生成相对定位的元素，相对于其正常位置进行定位。元素未脱离文档流，可通过top、bottom、left和right属性进行规定。
+* fixed 生成绝对定位的元素，相对于浏览器窗口进行定位。元素脱离文档流。其位置可通过top、bottom、left和right属性进行规定。
+* inherit 规定应该从父元素继承 position 属性的值。
+
+display 属性规定元素应该生成的框的类型。
+* none 隐藏对象。与visibility属性的hidden值不同，其不为被隐藏的对象保留其文档空间。
+* inline 指定对象为行内元素。行内元素不会独占一行，相邻的行内元素会排列在同一行里，直到一行排不下，才会换行，不可主动设置其width和height，两者由内容撑开。同时也不可设置margin和padding。
+* block 指定对象为块级元素。块级元素会独占一行，可主动设置其width和height。同时也可以通过设置margin和padding控制元素间的布局和元素内的布局。
+* inline-block 指定对象为行内块元素。介于inline和block，设置了该属性的元素表现为不独占一行，同时可以设置width、height、margin和padding。
+* flex 弹性盒布局模型。如果一个容器被指定为flex布局，其子元素的vertical-align、float和clear等属性将会失效。整个flex布局结构中，父元素称为flex容器(flex container)，子元素称为flex项目(flex item)。
+  关于弹性盒布局我推荐一篇阮一峰的文章，图文并茂，非常容易理解 [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)
 
 5. 样式的层级关系，选择器优先级，样式冲突，以及抽离样式模块怎么写，说出思路，有无实践经验
 
 6. css3动画效果属性，canvas、svg的区别，CSS3中新增伪类举例
 
-7. px和em和rem的区别
+7. px、em和rem的区别
+
+    px像素(Pixel)。通常指对应设备的物理像素。
+    em是相对长度单位。相对于当前元素内文本的字体尺寸。如果当前元素内文本的字体尺寸未被设置，则相对于浏览器的默认字体尺寸。
+    rem是CSS3新增的一个相对单位。其相对于HTML根元素文本的字体尺寸。
 
 8. CSS中link 和@import的区别是？
 
+
+
 9. 了解过flex吗？
+[Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)
 
 ## 「 JavaScript 篇 」
 
