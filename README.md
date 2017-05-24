@@ -615,8 +615,10 @@ function Person (name, age, job) {
     o.m.apply(o); //1
     ```
     运行结果就变成了1，证明了这时this代表的是对象o。
+    引用阮一峰文章[Javascript的this用法](http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html)
 
 6. apply和 call  什么含义，什么区别？什么时候用。（我有篇文章 重点分析过）
+    引自公众号前端你别闹的文章[Java script | call or apply](https://mp.weixin.qq.com/s?__biz=MzI5ODM3MjcxNQ==&mid=2247483821&idx=1&sn=d7491f01c21b33c4690c040ff9fe8fc9&mpshare=1&scene=23&srcid=0524HXxZHRuOj7RI1vYYXkmZ#rd)
 
 7. 数组和对象有哪些原生方法，列举一下，分别是什么含义，比如连接两个数组用哪个方法，删除数组的指定项和重新组装数组（操作数据的重点）。
 
