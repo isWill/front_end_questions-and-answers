@@ -481,9 +481,140 @@ function Person (name, age, job) {
     原始类型包括number、string、boolean、null和undefined。
     引用类型包括Object、Function、Date、Number、String和Boolean。
 
-4. 将一下 prototype 是什么东西，原型链的理解，什么时候用 prototype
+    先说相同点，在if语句中，都会被自动转为false，相等运算符甚至直接报告两者相等。`undefined == null //true`。既然undefined和null的含义与用法都差不多，为什么要同时设置两个这样的值，这是有历史原因的。详见[undefined与null的区别](http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html)
+    再来说说不同点：
+    
+    1）null和undefined在现代JS语义里面是有明确区别的：
+        
+        null表示一个值被定义了，定义为“空值”；
+        undefined表示根本不存在定义。
+        所以设置一个值为null是合理的，如 objA.valueA = null；
+        但设置一个值为undefined是不合理的，如 objA.valueA = undefined；// 应该直接使用delete objA.valueA;任何一个存在引用的变量值为undefined都是一件错误的事情。
+        这样判断一个值是否存在，就可以用 objA.valueA === undefined // 不应使用null 因为undefined == null，而null表示该值定义为空值。
+        这个语义在JSON规范中被强化，这个标准中不存在undefined这个类型，但存在表示空值的null。在一些使用广泛的库（比如jQuery）中的深度拷贝函数会忽略undefined而不会忽略null，也是针对这个语义的理解。
+        
+    2）JS中同时存在undefined和null是合理的。
+        
+        首先在Java中不存在undefined是很合理的：Java是一个静态类型语言，对于Java来说不可能存在一个“不存在”的成员（不存在的话直接就编译失败了），
+        所以只用null来表示语义上的空值。而JavaScript是一门动态类型语言，成员除了表示存在的空值外，还有可能根本就不存在（因为存不存在只在运行期才知道），
+        所以这就要一个值来表示对某成员的getter是取不到值的。
+    
+4. 讲一下 prototype 是什么东西，原型链的理解，什么时候用 prototype
 
-5. 函数里的this什么含义，什么情况下，怎么用。
+    我们创建的每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。
+    如果按照字面意思来理解，那么prototype就是通过调用构造函数而创建的那个对象实例的原型对象。使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法。
+    换句话说，不必在构造函数中定义对象实例的信息，而是可以将这些信息直接添加到原型对象中。
+    
+    ECMAScript中描述了原型链的概念，并将原型链作为实现继承的主要方法。其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。简单回顾一下构造函数、
+    原型和实例的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。那么，假如我们让原型对象等于
+    另一个类型的实例，结果会怎么样呢？显然，此时的原型对象将包含一个指向另一个原型的指针，相应地，另一个原型中也包含着一个指向另一个构造函数的指针。假如另一个
+    原型又是另一个类型的实例，那么上述关系依然成立，如此层层递进，就构成了实例与原型的链条。这就是所谓原型链的基本概念。
+
+5. 函数里的this什么含义，什么情况下怎么用。
+
+    this是JavaScript语言的一个关键字。
+    它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用，比如：
+    
+    ```javascript
+    function test() {
+       this.x = 1;
+    }
+    ```
+    随着函数使用场合的不同，this的值会发生变化。但是有一个总的原则，那这时this指的是，调用函数的那个对象。
+    下面分四种情况，详细讨论this的用法。
+    情况一：纯粹的函数调用
+    这是函数的最通常用法，属于全局性调用，因此this就代表全局对象Global。
+    请看下面这段代码，它的运行结果是1。
+    
+    ```javascript
+    function test() {
+       this.x = 1;
+       alert(this.x);
+    }
+ 
+    test(); // 1
+    ```
+    为了证明this就是全局对象，我对代码做一些改变：
+    
+    ```javascript
+    var x = 1;
+    function test() {
+       alert(this.x);
+    }
+     
+    test(); // 1
+    ```
+    运行结果还是1.再变一下：
+    
+    ```javascript
+    function test() {
+       this.x = 0;
+    }
+     
+    test();
+    alert(x);
+    ```
+    
+    情况二：作为对象方法的调用
+    函数还可以作为某个对象的方法调用，这时this就指这个上级对象。
+    
+    ```javascript
+   function test() {
+       alert(this.x);
+   }
+    
+   var o = {};
+   o.x = 1;
+   o.m = test;
+   o.m(); //1
+    ```
+    
+    情况三：作为构造函数调用
+    所谓构造函数，就是通过这个函数生成一个新对象（object）。这时，this就指这个新对象。
+    
+    ```javascript
+    function test() {
+        this.x =1;
+    }
+        
+    var o = new test();
+    alert(o.x); //1
+    ```
+    运行结果为1。为了表明这时this不是全局对象，我对代码做一些改变：
+    
+    ```javascript
+    var x = 2;
+    function test() {
+       this.x = 1;
+    }
+    var o = new test();
+    alert(x); // 2
+    
+    ```
+    运行结果为2，表明全局变量x的值根本没变。
+    
+    情况四：apply调用
+    apply()是函数对象的一个方法，它的作用是改变函数的调用对象，它的第一个参数就表示改变后的调用这个函数。
+    因此，this指的就是这第一个参数。
+    
+    ```javascript
+    var x = 0;
+    function test() {
+       alert(this.x);
+    }
+    var o = {};
+    o.x = 1;
+    o.m = test;
+    o.m.apply(); //0
+        
+    ```
+    apply()的参数为空时，默认调用全局对象。因此，这时的运行结果为0，证明this指的是全局对象。
+    如果把最后一行代码修改为
+    
+    ```javascript
+    o.m.apply(o); //1
+    ```
+    运行结果就变成了1，证明了这时this代表的是对象o。
 
 6. apply和 call  什么含义，什么区别？什么时候用。（我有篇文章 重点分析过）
 
