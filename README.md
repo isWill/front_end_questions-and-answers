@@ -498,6 +498,10 @@ function Person (name, age, job) {
         首先在Java中不存在undefined是很合理的：Java是一个静态类型语言，对于Java来说不可能存在一个“不存在”的成员（不存在的话直接就编译失败了），
         所以只用null来表示语义上的空值。而JavaScript是一门动态类型语言，成员除了表示存在的空值外，还有可能根本就不存在（因为存不存在只在运行期才知道），
         所以这就要一个值来表示对某成员的getter是取不到值的。
+
+    包装类型：专门封装原始类型的值，提供对值进行操作的方法
+    为什么使用：原始类型的值不带任何操作方法，必须通过包装类型提供对原始类型操作的方法
+    何时使用：在试图对原始类型的值调用方法时，js会自动创建对应的包装类型对象，封装原始类型的值。    
     
 4. 讲一下 prototype 是什么东西，原型链的理解，什么时候用 prototype
 
@@ -615,12 +619,144 @@ function Person (name, age, job) {
     o.m.apply(o); //1
     ```
     运行结果就变成了1，证明了这时this代表的是对象o。
-    引用阮一峰文章[Javascript的this用法](http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html)
+    
+    引用**阮一峰**的文章[Javascript的this用法](http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html)
 
 6. apply和 call  什么含义，什么区别？什么时候用。（我有篇文章 重点分析过）
-    引自公众号前端你别闹的文章[Java script | call or apply](https://mp.weixin.qq.com/s?__biz=MzI5ODM3MjcxNQ==&mid=2247483821&idx=1&sn=d7491f01c21b33c4690c040ff9fe8fc9&mpshare=1&scene=23&srcid=0524HXxZHRuOj7RI1vYYXkmZ#rd)
+    
+    引用公众号**前端你别闹**的文章[Java script | call or apply](https://mp.weixin.qq.com/s?__biz=MzI5ODM3MjcxNQ==&mid=2247483821&idx=1&sn=d7491f01c21b33c4690c040ff9fe8fc9&mpshare=1&scene=23&srcid=0524HXxZHRuOj7RI1vYYXkmZ#rd)
 
-7. 数组和对象有哪些原生方法，列举一下，分别是什么含义，比如连接两个数组用哪个方法，删除数组的指定项和重新组装数组（操作数据的重点）。
+7. 数组对象有哪些原生方法，列举一下，分别是什么含义，比如连接两个数组用哪个方法，删除数组的指定项和重新组装数组（操作数据的重点）。
+
+    7.1 检测数组
+    
+    ```javascript
+    var a = [];
+    var b = {};
+    Array.isArray(a); // true
+    Array.isArray(b); // false
+    ```
+    
+    7.2 转换方法
+    
+    ```javascript
+    var colors = ["red","green","blue"];
+    colors.toString(); // "red,green,blue" 调用数组内每一项的toString()方法
+    colors.toLocaleString(); // "red,green,blue" 调用数组内每一项的toLocalString()方法
+    colors.valueOf(); // ["red","green","blue"]
+    alert(colors); // "red,green,blue" 由于alert()要接收字符串参数，所以它会隐式地调用toString()
+    colors.join("|"); // "red|green|blue"
+    colors.join(); // "red,green,blue"  如果不给join()方法传入任何职，或者给它传入undefined，则使用逗号作为分隔符
+    ```
+    
+    7.3 栈方法
+    
+    ```javascript
+    var colors = [];
+    var count = colors.push("red","green"); 
+    console.log(count); //2 数组调用push()后返回数组的长度
+    var item = colors.pop();
+    console.log(item); //green 在调用pop()时，它会返回数组的最后一项
+    ```
+    
+    7.4 队列方法
+    
+    ```javascript
+    var colors = [];
+    colors.push("red","green"); // 从数组后面添加元素
+    var item = colors.shift(); // 从数组前面取出元素
+    console.log(item); //red 在调用shift()时，它会返回数组的第一项
+    ```
+    ```javascript
+    var colors = [];
+    var count = colors.unshift("red","green"); // 从数组后面添加元素
+    console.log(count); //2 数组调用push()后返回数组的长度
+    var item = colors.pop(); // 从数组前面取出元素
+    console.log(item); //green
+    ```
+    
+    7.5 重排序方法
+    
+    ```javascript
+    var values = [1,2,3,4,5,6];
+    values.reverse(); // reverse()反转数组项的顺序
+    console.log(values);// [6, 5, 4, 3, 2, 1]
+    ```
+    ```javascript
+    var values = [0,1,5,10,15];
+    values.sort(); // sort()方法默认按升序排列数组项，为了排序，sort()方法会调用每个数组项的toString（）方法转型，然后比较得到的字符串，以确定顺序。
+    console.log(values);// [0,1,10,15,5]
+    ```
+    ```javascript
+    var values = [0,1,5,10,15];
+    function compare(value1, value2){ // 这个比较函数可以适用于大多数数据类型
+       if(value1 < value2){
+           return -1; 
+       } else if (value1 > value2){
+           return 1;
+       } else {
+           return 0; 
+       }
+    }
+    values.sort(compare); // sort()方法可以接收一个比较函数作为参数。
+    console.log(values);// [0,1,5,10,15]
+    ```
+    
+    **reverse()和sort()方法的返回值是经过排序之后的数组。**
+    
+    7.6 操作方法
+    ```javascript
+    var colors = ["red","green","blue"];
+    var colors2 = colors.concat("yellow",["black", "brown"]);
+    console.log(colors); //["red","green","blue"] 数组colors不变
+    console.log(colors2); //["red","green","blue","yellow","black","brown"] 数组在调用concat()方法后返回一个新数组
+    ```
+    ```javascript
+    var colors = ["red","green","blue","yellow","purple"];
+    var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
+    var colors3 = colors.slice(1,4);
+    console.log(colors2); //["green", "blue", "yellow", "purple"]
+    console.log(colors3); //["green", "blue", "yellow"]
+    ```
+    ```javascript
+    var colors = ["red","green","blue","yellow","purple"];
+    var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
+    var colors3 = colors.slice(1,4);
+    console.log(colors2); //["green", "blue", "yellow", "purple"]
+    console.log(colors3); //["green", "blue", "yellow"]
+    ```
+    splice()的主要用途是向数组的中部插入项，但使用这种方法的方式则有如下3种。
+    * **删除：** 可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数。例如，splice(0,2)会删除数组中的前两项。
+    * **插入：** 可以向指定位置插入任意数量的项，只需提供3个参数：起始位置、0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置2开始插入字符串"red"和"green"。
+    * **替换：** 可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定3个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。例如，splice(2,1,"red","green")会删除当前数组位置2的项，然后再从位置2开始插入字符串"red"和"green"。
+    
+    ```javascript
+    var colors = ["red","green","blue"];
+    var removed = colors.splice(0,1);
+    console.log(colors); // ["green","blue"]
+    console.log(removed); // ["red"]
+ 
+    removed = colors.splice(1,0,"yellow","orange");
+    console.log(colors); // ["green","yellow","orange","blue"]
+    console.log(removed); // 返回一个空数组
+    
+    removed = colors.splice(1,1,"red","purple");
+    console.log(colors); // ["green","red","purple","orange","blue"]
+    console.log(removed); // ["yellow"] 返回的数组中只包含一项
+    ```
+    
+    7.7 位置方法
+    
+    ```javascript
+    var numbers = [1,2,3,4,5,4,3,2,1];
+    console.log(numbers.indexOf(4)); // 3
+    console.log(numbers.lastIndexOf(4)); // 5
+    console.log(numbers.indexOf(4,4)); // 5
+    console.log(numbers.lastIndexOf(4,4)); // 3
+    var person = {name:"Nicholas"};
+    var people = [{name:"Nicholas"}];
+    ```
+    
 
 8. 怎样避免全局变量污染？ES5严格模式的作用，ES6箭头函数和ES5普通函数一样吗？
 
