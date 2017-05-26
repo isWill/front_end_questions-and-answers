@@ -858,6 +858,18 @@ function Person (name, age, job) {
 
 5. ajax 跨域有哪些方法，jsonp 的原理是什么，如果页面编码和被请求的资源编码不一致如何处理？
 
+   JSONP是通过动态<script>元素来使用的，使用时可以为src属性指定一个跨域URL。这里的<script>元素与<img>元素类似，都有能力不受限制地从其他域加载资源。因为JSONP
+   是有效的JavaScript代码，所以请求完成后，即在JSONP响应加载到页面中以后，就会立即执行。
+   
+   ```javascript
+    function handleResponse(){
+       alert("You're at IP address " + response.ip + ", which is in " + response.city + ", " + response.region_name)
+    }
+    var script = document.createElement("script");
+    script.src = "http://freegeoip.net/json/?callback=handleResponse";
+    document.body.insertBefore(script, document.body.firstChild);
+   ```
+
 ## 「 开源工具 」
 
 1. 是否了解开源的架构工具 bower、npm、yeoman、gulp、webpack，有无用过，有无写过，一个 npm 的包里的 package.json 具备的必要的字段都有哪些（名称、版本号，依赖）
