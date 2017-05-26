@@ -819,16 +819,40 @@ function Person (name, age, job) {
     console.log(sum); //15
     ```
     
-
 8. 怎样避免全局变量污染？ES5严格模式的作用，ES6箭头函数和ES5普通函数一样吗？
 
+    引用CSDN博客“小北哥哥”的博文[防止js全局变量污染方法总结-待续](http://blog.csdn.net/xllily_11/article/details/52816699)
+    
+    严格模式是为JavaScript定义了一种不同的解析与执行模型。在严格模式下，ECMAScript3中的一些不确定的行为将得到处理，而且对某些不安全的操作也会抛出错误。
+    启用安全模式的两种方式：
+    
+    ```javascript
+    //全局使用
+    'use strict';
+    ```
+    ```javascript
+    //函数内使用
+    function test(){
+       'use strict';
+    }
+    ```
+    引用CSDN博客“brizer的博客”的博文[初步探究ES6之箭头函数](http://blog.csdn.net/mevicky/article/details/49942559)
+    
 ### JavaScript 的面向对象
 
 1. JS 模块包装格式都用过哪些，CommonJS、AMD、CMD。定义一个JS 模块代码，最精简的格式是怎样。
+   
+   - [Javascript模块化编程（一）：模块的写法](http://www.ruanyifeng.com/blog/2012/10/javascript_module.html)
+   - [Javascript模块化编程（二）：AMD规范](http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html)
+   - [Javascript模块化编程（三）：require.js的用法](http://www.ruanyifeng.com/blog/2012/11/require_js.html)
 
 2. JS 怎么实现一个类。怎么实例化这个类。
+   
+   [Javascript定义类（class）的三种方法](http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html)
 
 3. 理解闭包吗？请讲一讲闭包在实际开发中的作用；闭包建议频繁使用吗？
+
+    [学习Javascript闭包（Closure）](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html)
 
 4. 说一下了解的js 设计模式，解释一下单例、工厂、观察者。
 
