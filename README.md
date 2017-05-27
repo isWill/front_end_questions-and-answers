@@ -878,13 +878,25 @@ function Person (name, age, job) {
 
 3. 会不会用 ps 扣图，png、jpg、gif 这些图片格式解释一下，分别什么时候用。如何优化图像、图像格式的区别
 
+    可参考[png、jpg、gif三种图片格式的区别](http://www.cnblogs.com/Fran-Lily/p/3792641.html)
+
 4. 说一下你常用的命令行工具
 
+    SecureCRT: 一款Windows下登录UNIX或Linux服务器主机的软件。
+    Git bash: Windows下的命令行工具。主要用于git。
+
 5. 会不会用git，说上来几个命令，说一下git和svn的区别，有没有用git解决过冲突
+
+    SVN是集中式版本控制系统，git是分布式版本控制系统，有什么区别呢？
+    可以阅读廖雪峰的文章[集中式vs分布式](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374027586935cf69c53637d8458c9aec27dd546a6cd6000)
 
 ## 「 计算机网络基础 」
 
 1. 说一下HTTP 协议头字段说上来几个，是否尽可能详细的掌握HTTP协议。一次完整的HTTP事务是怎样的一个过程？
+
+    * [互联网协议入门（一）](http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html)
+    * [互联网协议入门（二）](http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html)
+    * [HTTP 协议入门](http://www.ruanyifeng.com/blog/2016/08/http.html)
 
 2. cookies 是干嘛的，服务器和浏览器之间的 cookies 是怎么传的，httponly的cookies和可读写的cookie有什么区别，有无长度限制,请描述一下cookies，sessionStorage和localStorage的区别
 
