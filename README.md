@@ -29,20 +29,20 @@ IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和pad
 
 ```css
 .fix::after { 
-     content:"."; 
-     display:block; 
-     height:0; 
-     visibility:hidden; 
-     clear:both;
+     content: "."; 
+     display: block; 
+     height: 0; 
+     visibility: hidden; 
+     clear: both;
 }
 ```
 改进后的样式为
 
 ```css
 .fix::after { 
-     content:""; 
-     display:table; 
-     clear:both;
+     content: ""; 
+     display: table; 
+     clear: both;
 }
 ```
 + 给父元素添加`overflow: hidden`
