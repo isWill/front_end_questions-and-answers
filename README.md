@@ -304,7 +304,7 @@ link方式：
 
 ```html
 <style>
-@import "style.css";
+     @import "style.css";
 </style>
 ```
 link和@import两种导入css文件的区别：
