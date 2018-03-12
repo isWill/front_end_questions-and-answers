@@ -235,7 +235,7 @@ td.child {
 
 ### 6. CSS3动画效果属性，canvas、svg的区别，CSS3中新增伪类举例
 
-    CSS3动画相关的属性：
+CSS3动画相关的属性：
     * @keyframes	规定动画。
     * animation	所有动画属性的简写属性，除了 animation-play-state 属性。
     * animation-name	规定 @keyframes 动画的名称。
@@ -247,17 +247,17 @@ td.child {
     * animation-play-state	规定动画是否正在运行或暂停。默认是 "running"。
     * animation-fill-mode	规定对象动画时间之外的状态。
     
-    Canvas 与 SVG 的比较
+Canvas 与 SVG 的比较
     下表列出了 canvas 与 SVG 之间的一些不同之处。
     
-    Canvas
+Canvas
     * 依赖分辨率
     * 不支持事件处理器
     * 弱的文本渲染能力
     * 能够以 .png 或 .jpg 格式保存结果图像
     * 最适合图像密集型的游戏，其中的许多对象会被频繁重绘
     
-    SVG
+SVG
     * 不依赖分辨率
     * 支持事件处理器
     * 最适合带有大型渲染区域的应用程序（比如谷歌地图）
@@ -267,7 +267,7 @@ td.child {
     CSS3为了区分伪类和伪元素，已经明确规定了伪类用一个冒号来表示，而伪元素则用两个冒号来表示。但因为兼容性的问题，所以现在大部分还是统一的单冒号，但是抛开兼容性的问题，我们在书写时应该尽可能养成好习惯，区分两者。
     单冒号(:)用于CSS3伪类，双冒号(::)用于CSS3伪元素。伪元素由双冒号和伪元素名称组成。不过浏览器需要同时支持旧的已经存在的伪元素写法，比如:first-line、:first-letter、:before、:after等，而新的在CSS3中引入的伪元素则不允许再支持旧的单冒号的写法。
     
-    CSS3新增伪类
+CSS3新增伪类
     * p:first-of-type 选择属于其父元素的首个\<p>元素的每个\<p>元素。
     * p:last-of-type 选择属于其父元素的最后\<p>元素的每个\<p>元素。
     * p:only-of-type 选择属于其父元素唯一的\<p>元素的每个\<p>元素。
