@@ -1,13 +1,13 @@
 # 前端问答
 ## 「 CSS篇 」
-1. CSS 盒子模型，绝对定位和相对定位
+### 1. CSS 盒子模型，绝对定位和相对定位
 
-盒子模型：
-标准盒子模型的宽度 = 左右margin + 左右border + 左右padding + width；
-IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和padiing)；
-相对定位和绝对定位：
+#### 盒子模型：
+* 标准盒子模型的宽度 = 左右margin + 左右border + 左右padding + width；
+* IE盒子模型的宽度 = 左右margin + width(IE中的content包含border和padiing)；
+#### 相对定位和绝对定位：
 
-2. 清除浮动，什么时候需要清除浮动，清除浮动都有哪些方法
+### 2. 清除浮动，什么时候需要清除浮动，清除浮动都有哪些方法
 
 给子元素添加float属性，同时希望父元素的高度不会塌陷，此时我们需要清除浮动；
 清除浮动的几种方法：
