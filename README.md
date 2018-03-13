@@ -702,13 +702,7 @@ var colors3 = colors.slice(1,4);
 console.log(colors2); //["green", "blue", "yellow", "purple"]
 console.log(colors3); //["green", "blue", "yellow"]
 ```
-```javascript
-var colors = ["red","green","blue","yellow","purple"];
-var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
-var colors3 = colors.slice(1,4);
-console.log(colors2); //["green", "blue", "yellow", "purple"]
-console.log(colors3); //["green", "blue", "yellow"]
-```
+
 splice()的主要用途是向数组的中部插入项，但使用这种方法的方式则有如下3种。
 * **删除：** 可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数。例如，splice(0,2)会删除数组中的前两项。
 * **插入：** 可以向指定位置插入任意数量的项，只需提供3个参数：起始位置、0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置2开始插入字符串"red"和"green"。
@@ -750,7 +744,7 @@ console.log(morePeople.indexOf(person)); // 0
 * forEach()：对数组中的每一项运行给定函数，这个方法没有返回值。
 * map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
 * some()：对数组中的每一项运行给定函数，如果该函数对任一项返回true，则返回true。
-以上方法都不会修改数组中的包含的值。
+* 以上方法都不会修改数组中的包含的值。
 
 ```javascript
 var numbers = [1,2,3,4,5,4,3,2,1];
