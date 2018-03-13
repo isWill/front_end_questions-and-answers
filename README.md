@@ -621,7 +621,7 @@ Array.isArray(a); // true
 Array.isArray(b); // false
 ```
     
-7.2 转换方法
+#### 7.2 转换方法
     
 ```javascript
 var colors = ["red","green","blue"];
@@ -633,7 +633,7 @@ colors.join("|"); // "red|green|blue"
 colors.join(); // "red,green,blue"  如果不给join()方法传入任何职，或者给它传入undefined，则使用逗号作为分隔符
 ```
     
-7.3 栈方法
+#### 7.3 栈方法
     
 ```javascript
 var colors = [];
@@ -643,7 +643,7 @@ var item = colors.pop();
 console.log(item); //green 在调用pop()时，它会返回数组的最后一项
 ```
     
-7.4 队列方法
+#### 7.4 队列方法
     
 ```javascript
 var colors = [];
@@ -659,7 +659,7 @@ var item = colors.pop(); // 从数组前面取出元素
 console.log(item); //green
 ```
     
-7.5 重排序方法
+#### 7.5 重排序方法
     
 ```javascript
 var values = [1,2,3,4,5,6];
@@ -688,139 +688,139 @@ console.log(values);// [0,1,5,10,15]
     
 **reverse()和sort()方法的返回值是经过排序之后的数组。**
     
-7.6 操作方法
+#### 7.6 操作方法
 ```javascript
 var colors = ["red","green","blue"];
 var colors2 = colors.concat("yellow",["black", "brown"]);
-    console.log(colors); //["red","green","blue"] 数组colors不变
-    console.log(colors2); //["red","green","blue","yellow","black","brown"] 数组在调用concat()方法后返回一个新数组
-    ```
-    ```javascript
-    var colors = ["red","green","blue","yellow","purple"];
-    var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
-    var colors3 = colors.slice(1,4);
-    console.log(colors2); //["green", "blue", "yellow", "purple"]
-    console.log(colors3); //["green", "blue", "yellow"]
-    ```
-    ```javascript
-    var colors = ["red","green","blue","yellow","purple"];
-    var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
-    var colors3 = colors.slice(1,4);
-    console.log(colors2); //["green", "blue", "yellow", "purple"]
-    console.log(colors3); //["green", "blue", "yellow"]
-    ```
-    splice()的主要用途是向数组的中部插入项，但使用这种方法的方式则有如下3种。
-    * **删除：** 可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数。例如，splice(0,2)会删除数组中的前两项。
-    * **插入：** 可以向指定位置插入任意数量的项，只需提供3个参数：起始位置、0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置2开始插入字符串"red"和"green"。
-    * **替换：** 可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定3个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。例如，splice(2,1,"red","green")会删除当前数组位置2的项，然后再从位置2开始插入字符串"red"和"green"。
+console.log(colors); //["red","green","blue"] 数组colors不变
+console.log(colors2); //["red","green","blue","yellow","black","brown"] 数组在调用concat()方法后返回一个新数组
+```
+```javascript
+var colors = ["red","green","blue","yellow","purple"];
+var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
+var colors3 = colors.slice(1,4);
+console.log(colors2); //["green", "blue", "yellow", "purple"]
+console.log(colors3); //["green", "blue", "yellow"]
+```
+```javascript
+var colors = ["red","green","blue","yellow","purple"];
+var colors2 = colors.slice(1); // slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。注意，slice()方法不会影响原始数组。
+var colors3 = colors.slice(1,4);
+console.log(colors2); //["green", "blue", "yellow", "purple"]
+console.log(colors3); //["green", "blue", "yellow"]
+```
+splice()的主要用途是向数组的中部插入项，但使用这种方法的方式则有如下3种。
+* **删除：** 可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数。例如，splice(0,2)会删除数组中的前两项。
+* **插入：** 可以向指定位置插入任意数量的项，只需提供3个参数：起始位置、0（要删除的项数）和要插入的项。如果要插入多个项，可以再传入第四、第五，以至任意多个项。例如，splice(2,0,"red","green")会从当前数组的位置2开始插入字符串"red"和"green"。
+* **替换：** 可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定3个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。例如，splice(2,1,"red","green")会删除当前数组位置2的项，然后再从位置2开始插入字符串"red"和"green"。
     
-    ```javascript
-    var colors = ["red","green","blue"];
-    var removed = colors.splice(0,1);
-    console.log(colors); // ["green","blue"]
-    console.log(removed); // ["red"]
+```javascript
+var colors = ["red","green","blue"];
+var removed = colors.splice(0,1);
+console.log(colors); // ["green","blue"]
+console.log(removed); // ["red"]
  
-    removed = colors.splice(1,0,"yellow","orange");
-    console.log(colors); // ["green","yellow","orange","blue"]
-    console.log(removed); // 返回一个空数组
-    
-    removed = colors.splice(1,1,"red","purple");
-    console.log(colors); // ["green","red","purple","orange","blue"]
-    console.log(removed); // ["yellow"] 返回的数组中只包含一项
-    ```
-    
-    7.7 位置方法
-    
-    ```javascript
-    var numbers = [1,2,3,4,5,4,3,2,1];
-    console.log(numbers.indexOf(4)); // 3
-    console.log(numbers.lastIndexOf(4)); // 5
-    console.log(numbers.indexOf(4,4)); // 5
-    console.log(numbers.lastIndexOf(4,4)); // 3
-    var person = {name:"Nicholas"};
-    var people = [{name:"Nicholas"}];
-    var morePeople = [person];
-    console.log(people.indexOf(person)); // -1
-    console.log(morePeople.indexOf(person)); // 0
-    ```
-    
-    7.8 迭代方法
-    * every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回true，则返回true。
-    * filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组。
-    * forEach()：对数组中的每一项运行给定函数，这个方法没有返回值。
-    * map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
-    * some()：对数组中的每一项运行给定函数，如果该函数对任一项返回true，则返回true。
-    以上方法都不会修改数组中的包含的值。
-    
-    ```javascript
-    var numbers = [1,2,3,4,5,4,3,2,1];
-    var everyResult = numbers.every(function(item, index, array){
-       return (item > 2);
-    });
-    console.log(everyResult); //false
-    var someResult = numbers.some(function(item, index, array){
-       return (item > 2);
-    });
-    console.log(someResult); //true
-    ```
-    ```javascript
-    var numbers = [1,2,3,4,5,4,3,2,1];
-    var filterResult = numbers.filter(function(item, index, array){
-       return (item > 2);
-    });
-    console.log(filterResult); //[3,4,5,4,3]
-    ```
-    ```javascript
-    var numbers = [1,2,3,4,5,4,3,2,1];
-    var mapResult = numbers.map(function(item, index, array){
-       return item * 2;
-    });
-    console.log(mapResult); //[2, 4, 6, 8, 10, 8, 6, 4, 2]
-    ```
-    ```javascript
-    var numbers = [1,2,3,4,5,4,3,2,1];
-    numbers.forEach(function(item, index, array){
-       // 执行某些操作
-    });
-    ```
-    
-    7.9 归并方法
-    ECMAScript5新增了两个归并数组的方法：reduce()和reduceRight()。这个两个方法都会迭代数组的所有项，然后构建一个最终返回的值。
-    
-    ```javascript
-    var values = [1,2,3,4,5];
-    var sum = values.reduce(function(prev, cur, index, array){
-       return prev + cur;
-    });
-    console.log(sum); //15
-    ```
-    
-    ```javascript
-    var values = [1,2,3,4,5];
-    var sum = values.reduceRIght(function(prev, cur, index, array){
-       return prev + cur;
-    });
-    console.log(sum); //15
-    ```
+removed = colors.splice(1,0,"yellow","orange");
+console.log(colors); // ["green","yellow","orange","blue"]
+console.log(removed); // 返回一个空数组
+
+removed = colors.splice(1,1,"red","purple");
+console.log(colors); // ["green","red","purple","orange","blue"]
+console.log(removed); // ["yellow"] 返回的数组中只包含一项
+```
+
+#### 7.7 位置方法
+
+```javascript
+var numbers = [1,2,3,4,5,4,3,2,1];
+console.log(numbers.indexOf(4)); // 3
+console.log(numbers.lastIndexOf(4)); // 5
+console.log(numbers.indexOf(4,4)); // 5
+console.log(numbers.lastIndexOf(4,4)); // 3
+var person = {name:"Nicholas"};
+var people = [{name:"Nicholas"}];
+var morePeople = [person];
+console.log(people.indexOf(person)); // -1
+console.log(morePeople.indexOf(person)); // 0
+```
+
+#### 7.8 迭代方法
+* every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回true，则返回true。
+* filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组。
+* forEach()：对数组中的每一项运行给定函数，这个方法没有返回值。
+* map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+* some()：对数组中的每一项运行给定函数，如果该函数对任一项返回true，则返回true。
+以上方法都不会修改数组中的包含的值。
+
+```javascript
+var numbers = [1,2,3,4,5,4,3,2,1];
+var everyResult = numbers.every(function(item, index, array){
+   return (item > 2);
+});
+console.log(everyResult); //false
+var someResult = numbers.some(function(item, index, array){
+   return (item > 2);
+});
+console.log(someResult); //true
+```
+```javascript
+var numbers = [1,2,3,4,5,4,3,2,1];
+var filterResult = numbers.filter(function(item, index, array){
+   return (item > 2);
+});
+console.log(filterResult); //[3,4,5,4,3]
+```
+```javascript
+var numbers = [1,2,3,4,5,4,3,2,1];
+var mapResult = numbers.map(function(item, index, array){
+   return item * 2;
+});
+console.log(mapResult); //[2, 4, 6, 8, 10, 8, 6, 4, 2]
+```
+```javascript
+var numbers = [1,2,3,4,5,4,3,2,1];
+numbers.forEach(function(item, index, array){
+   // 执行某些操作
+});
+```
+
+#### 7.9 归并方法
+ECMAScript5新增了两个归并数组的方法：reduce()和reduceRight()。这个两个方法都会迭代数组的所有项，然后构建一个最终返回的值。
+
+```javascript
+var values = [1,2,3,4,5];
+var sum = values.reduce(function(prev, cur, index, array){
+   return prev + cur;
+});
+console.log(sum); //15
+```
+
+```javascript
+var values = [1,2,3,4,5];
+var sum = values.reduceRIght(function(prev, cur, index, array){
+   return prev + cur;
+});
+console.log(sum); //15
+```
     
 ### 8. 怎样避免全局变量污染？ES5严格模式的作用，ES6箭头函数和ES5普通函数一样吗？
 
-    引用CSDN博客“小北哥哥”的博文[防止js全局变量污染方法总结-待续](http://blog.csdn.net/xllily_11/article/details/52816699)
-    
-    严格模式是为JavaScript定义了一种不同的解析与执行模型。在严格模式下，ECMAScript3中的一些不确定的行为将得到处理，而且对某些不安全的操作也会抛出错误。
-    启用安全模式的两种方式：
-    
-    ```javascript
-    //全局使用
-    'use strict';
-    ```
-    ```javascript
-    //函数内使用
-    function test(){
-       'use strict';
-    }
-    ```
-    引用CSDN博客“brizer的博客”的博文[初步探究ES6之箭头函数](http://blog.csdn.net/mevicky/article/details/49942559)
+引用CSDN博客“小北哥哥”的博文[防止js全局变量污染方法总结-待续](http://blog.csdn.net/xllily_11/article/details/52816699)
+
+严格模式是为JavaScript定义了一种不同的解析与执行模型。在严格模式下，ECMAScript3中的一些不确定的行为将得到处理，而且对某些不安全的操作也会抛出错误。
+启用安全模式的两种方式：
+
+```javascript
+//全局使用
+'use strict';
+```
+```javascript
+//函数内使用
+function test(){
+   'use strict';
+}
+```
+引用CSDN博客“brizer的博客”的博文[初步探究ES6之箭头函数](http://blog.csdn.net/mevicky/article/details/49942559)
     
 ## JavaScript 的面向对象
 
