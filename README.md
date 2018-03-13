@@ -653,9 +653,9 @@ console.log(item); //red 在调用shift()时，它会返回数组的第一项
 ```
 ```javascript
 var colors = [];
-var count = colors.unshift("red","green"); // 从数组后面添加元素
-console.log(count); //2 数组调用push()后返回数组的长度
-var item = colors.pop(); // 从数组前面取出元素
+var count = colors.unshift("red","green"); // 从数组前面添加元素
+console.log(count); //2 数组调用unshift()后返回数组的长度
+var item = colors.pop(); // 从数组后面取出元素
 console.log(item); //green
 ```
     
