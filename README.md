@@ -612,86 +612,86 @@ o.m.apply(o); //1
 
 ### 7. 数组对象有哪些原生方法，列举一下，分别是什么含义，比如连接两个数组用哪个方法，删除数组的指定项和重新组装数组（操作数据的重点）。
 
-    7.1 检测数组
+#### 7.1 检测数组
     
-    ```javascript
-    var a = [];
-    var b = {};
-    Array.isArray(a); // true
-    Array.isArray(b); // false
-    ```
+```javascript
+var a = [];
+var b = {};
+Array.isArray(a); // true
+Array.isArray(b); // false
+```
     
-    7.2 转换方法
+7.2 转换方法
     
-    ```javascript
-    var colors = ["red","green","blue"];
-    colors.toString(); // "red,green,blue" 调用数组内每一项的toString()方法
-    colors.toLocaleString(); // "red,green,blue" 调用数组内每一项的toLocalString()方法
-    colors.valueOf(); // ["red","green","blue"]
-    alert(colors); // "red,green,blue" 由于alert()要接收字符串参数，所以它会隐式地调用toString()
-    colors.join("|"); // "red|green|blue"
-    colors.join(); // "red,green,blue"  如果不给join()方法传入任何职，或者给它传入undefined，则使用逗号作为分隔符
-    ```
+```javascript
+var colors = ["red","green","blue"];
+colors.toString(); // "red,green,blue" 调用数组内每一项的toString()方法
+colors.toLocaleString(); // "red,green,blue" 调用数组内每一项的toLocalString()方法
+colors.valueOf(); // ["red","green","blue"]
+alert(colors); // "red,green,blue" 由于alert()要接收字符串参数，所以它会隐式地调用toString()
+colors.join("|"); // "red|green|blue"
+colors.join(); // "red,green,blue"  如果不给join()方法传入任何职，或者给它传入undefined，则使用逗号作为分隔符
+```
     
-    7.3 栈方法
+7.3 栈方法
     
-    ```javascript
-    var colors = [];
-    var count = colors.push("red","green"); 
-    console.log(count); //2 数组调用push()后返回数组的长度
-    var item = colors.pop();
-    console.log(item); //green 在调用pop()时，它会返回数组的最后一项
-    ```
+```javascript
+var colors = [];
+var count = colors.push("red","green"); 
+console.log(count); //2 数组调用push()后返回数组的长度
+var item = colors.pop();
+console.log(item); //green 在调用pop()时，它会返回数组的最后一项
+```
     
-    7.4 队列方法
+7.4 队列方法
     
-    ```javascript
-    var colors = [];
-    colors.push("red","green"); // 从数组后面添加元素
-    var item = colors.shift(); // 从数组前面取出元素
-    console.log(item); //red 在调用shift()时，它会返回数组的第一项
-    ```
-    ```javascript
-    var colors = [];
-    var count = colors.unshift("red","green"); // 从数组后面添加元素
-    console.log(count); //2 数组调用push()后返回数组的长度
-    var item = colors.pop(); // 从数组前面取出元素
-    console.log(item); //green
-    ```
+```javascript
+var colors = [];
+colors.push("red","green"); // 从数组后面添加元素
+var item = colors.shift(); // 从数组前面取出元素
+console.log(item); //red 在调用shift()时，它会返回数组的第一项
+```
+```javascript
+var colors = [];
+var count = colors.unshift("red","green"); // 从数组后面添加元素
+console.log(count); //2 数组调用push()后返回数组的长度
+var item = colors.pop(); // 从数组前面取出元素
+console.log(item); //green
+```
     
-    7.5 重排序方法
+7.5 重排序方法
     
-    ```javascript
-    var values = [1,2,3,4,5,6];
-    values.reverse(); // reverse()反转数组项的顺序
-    console.log(values);// [6, 5, 4, 3, 2, 1]
-    ```
-    ```javascript
-    var values = [0,1,5,10,15];
-    values.sort(); // sort()方法默认按升序排列数组项，为了排序，sort()方法会调用每个数组项的toString（）方法转型，然后比较得到的字符串，以确定顺序。
-    console.log(values);// [0,1,10,15,5]
-    ```
-    ```javascript
-    var values = [0,1,5,10,15];
-    function compare(value1, value2){ // 这个比较函数可以适用于大多数数据类型
-       if(value1 < value2){
-           return -1; 
-       } else if (value1 > value2){
-           return 1;
-       } else {
-           return 0; 
-       }
-    }
-    values.sort(compare); // sort()方法可以接收一个比较函数作为参数。
-    console.log(values);// [0,1,5,10,15]
-    ```
+```javascript
+var values = [1,2,3,4,5,6];
+values.reverse(); // reverse()反转数组项的顺序
+console.log(values);// [6, 5, 4, 3, 2, 1]
+```
+```javascript
+var values = [0,1,5,10,15];
+values.sort(); // sort()方法默认按升序排列数组项，为了排序，sort()方法会调用每个数组项的toString（）方法转型，然后比较得到的字符串，以确定顺序。
+console.log(values);// [0,1,10,15,5]
+```
+```javascript
+var values = [0,1,5,10,15];
+function compare(value1, value2){ // 这个比较函数可以适用于大多数数据类型
+   if(value1 < value2){
+       return -1; 
+   } else if (value1 > value2){
+       return 1;
+   } else {
+       return 0; 
+   }
+}
+values.sort(compare); // sort()方法可以接收一个比较函数作为参数。
+console.log(values);// [0,1,5,10,15]
+```
     
-    **reverse()和sort()方法的返回值是经过排序之后的数组。**
+**reverse()和sort()方法的返回值是经过排序之后的数组。**
     
-    7.6 操作方法
-    ```javascript
-    var colors = ["red","green","blue"];
-    var colors2 = colors.concat("yellow",["black", "brown"]);
+7.6 操作方法
+```javascript
+var colors = ["red","green","blue"];
+var colors2 = colors.concat("yellow",["black", "brown"]);
     console.log(colors); //["red","green","blue"] 数组colors不变
     console.log(colors2); //["red","green","blue","yellow","black","brown"] 数组在调用concat()方法后返回一个新数组
     ```
